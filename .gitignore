@@ -1,0 +1,14 @@
+﻿node_modules/
+__pycache__/
+.venv/
+.pytest_cache/
+htmlcov/
+coverage.xml
+.env
+*.log
+dist/
+build/
+jmeter/results/
+reports/
+*.zip
+.DS_Store

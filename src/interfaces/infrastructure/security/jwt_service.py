@@ -1,0 +1,6 @@
+﻿# Archivo temporal para que no rompa el import
+from typing import Protocol
+
+class IJWTService(Protocol):
+    def generate_token(self, user_id: str) -> str: ...
+    def verify_token(self, token: str) -> dict: ...

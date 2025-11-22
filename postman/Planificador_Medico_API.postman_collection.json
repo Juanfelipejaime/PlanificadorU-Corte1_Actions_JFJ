@@ -1,0 +1,83 @@
+{
+  "info": {
+    "name": "Planificador Médico API - Calidad Corte 1",
+    "_postman_id": "11111111-2222-3333-4444-555555555555",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/health",
+          "host": ["{{BASE_URL}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Register Médico",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"dr.casa@test.com\",\n    \"nombre\": \"Gregory\",\n    \"apellido\": \"House\",\n    \"password\": \"lupus123\",\n    \"especialidad\": \"Diagnóstico\",\n    \"numero_licencia\": \"MD-999\",\n    \"telefono\": \"555-0199\",\n    \"rol\": \"MEDICO\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/usuarios/register",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "usuarios", "register"]
+        }
+      }
+    },
+    {
+      "name": "3. Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "    const json = pm.response.json();",
+              "    pm.environment.set(\"token\", json.token || json.access_token);",
+              "    console.log(\"Token guardado:\", pm.environment.get(\"token\"));",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"dr.casa@test.com\",\n    \"password\": \"lupus123\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/usuarios/login",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "usuarios", "login"]
+        }
+      }
+    },
+    {
+      "name": "4. Mi Perfil (Protegido)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/api/usuarios/me",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "usuarios", "me"]
+        }
+      }
+    }
+  ]
+}
