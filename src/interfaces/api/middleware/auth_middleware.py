@@ -6,7 +6,7 @@ from functools import wraps
 from flask import request, jsonify, g
 from typing import List, Optional, Callable
 from ...infrastructure.security.jwt_service import IJWTService
-from ...application.use_cases.usuario_use_cases import ObtenerUsuarioPorIdUseCase
+from src/application/use_cases/usuario_use_cases import ObtenerUsuarioPorIdUseCase
 
 
 class AuthMiddleware:
