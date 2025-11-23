@@ -5,7 +5,7 @@ Cumple con SRP: Solo maneja la interfaz HTTP para usuarios.
 """
 from flask import Blueprint, request, jsonify, g
 from typing import Dict, Any
-from ...middleware.auth_middleware import AuthMiddleware
+from ..middleware.auth_middleware import AuthMiddleware
 from ....application.use_cases.usuario_use_cases import (
     CrearUsuarioUseCase, LoginUsuarioUseCase, ActualizarUsuarioUseCase,
     ListarUsuariosUseCase, ObtenerUsuarioPorIdUseCase
