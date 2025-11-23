@@ -16,4 +16,4 @@ jobs:
 
       - name: Ejecutar script de despliegue
         shell: powershell
-        run: C:\borra\actions-runner\deploy.ps1
+        run: "C:\borra\actions-runner\deploy.ps1"
