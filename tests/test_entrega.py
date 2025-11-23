@@ -6,7 +6,7 @@ def test_salud_del_sistema():
     assert 1 + 1 == 2
 
 def test_api_basica():
-    \"\"\"Prueba de endpoint básico\"\"\"
+    \"""Prueba de endpoint básico"""
     import requests
     try:
         r = requests.get('http://localhost:5000/health', timeout=3)
