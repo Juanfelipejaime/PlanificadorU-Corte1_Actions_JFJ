@@ -1,7 +1,7 @@
 ﻿import pytest
 
 def test_salud_del_sistema():
-    \"\"\"Prueba básica de salud del sistema\"\"\"
+    """Prueba básica de salud del sistema"""
     assert True == True
     assert 1 + 1 == 2
 
