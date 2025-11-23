@@ -1,0 +1,19 @@
+name: CD - Deploy Local
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy en servidor local
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout del repo
+        uses: actions/checkout@v3
+
+      - name: Ejecutar script de despliegue
+        shell: powershell
+        run: C:\deploy\deploy.ps1
