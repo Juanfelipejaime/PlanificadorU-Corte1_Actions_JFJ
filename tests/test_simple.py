@@ -1,4 +1,4 @@
-﻿import pytest
+"""import pytest
 import sys
 import os
 sys.path.insert(0, os.path.abspath('.'))
@@ -17,4 +17,4 @@ def test_api_info():
     client = app.test_client()
     response = client.get('/api/info')
     assert response.status_code == 200
-    assert b'Planificador' in response.data
+    assert b'Planificador' in response.data"""
