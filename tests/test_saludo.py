@@ -1,4 +1,8 @@
+import sys, os
+sys.path.insert(0, os.path.abspath("."))
+
 from backend.app import create_app
+
 
 def test_saludo():
     app = create_app()
