@@ -1,4 +1,4 @@
-name: CI - Python Tests
+name: CI - Python Tests + Security
 
 on:
   push:
@@ -7,6 +7,10 @@ on:
     branches: [ main ]
 
 jobs:
+
+  # -----------------------------
+  # 1) TESTS UNITARIOS
+  # -----------------------------
   test:
     runs-on: ubuntu-latest
 
@@ -17,7 +21,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'   # Cambia a la versión que uses
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
@@ -27,3 +31,38 @@ jobs:
     - name: Run tests
       run: |
         pytest --maxfail=1 --disable-warnings -q
+
+  # -----------------------------
+  # 2) SAST - SEMGREP (Análisis estático de seguridad)
+  # -----------------------------
+  semgrep:
+    runs-on: ubuntu-latest
+    needs: test    # Solo corre si los tests pasaron
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Semgrep
+      uses: returntocorp/semgrep-action@v1
+
+    - name: Run Semgrep scan
+      run: |
+        semgrep --config=p/ci .
+
+  # -----------------------------
+  # 3) SECRET SCANNING - GITLEAKS
+  # -----------------------------
+  gitleaks:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run Gitleaks (secret scanner)
+      uses: gitleaks/gitleaks-action@v2
+      with:
+        args: detect --source . --no-git -v
+
