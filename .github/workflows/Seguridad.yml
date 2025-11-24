@@ -7,22 +7,22 @@ on:
 
 jobs:
 
-  # ===============================
-  # 1) SAST - SEMGREP
-  # ===============================
-  semgrep:
-    runs-on: ubuntu-latest
+# ===============================
+# 1) SAST - SEMGREP
+# ===============================
+semgrep:
+  runs-on: ubuntu-latest
 
-    steps:
+  steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install Semgrep
-      uses: returntocorp/semgrep-action@v1
-
     - name: Run Semgrep scan
-      run: |
-        semgrep --config=p/ci .
+      uses: returntocorp/semgrep-action@v1
+      with:
+        config: p/ci
+        skip-unknown-extensions: true
+        strict: false
 
   # ===============================
   # 2) SECRET SCANNING - GITLEAKS
